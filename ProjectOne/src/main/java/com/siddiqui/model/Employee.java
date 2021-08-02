@@ -1,7 +1,7 @@
 package com.siddiqui.model;
 
 public class Employee {
-	int ers_id;
+	int user_id;
 	int user_role_id;
 	String username;
 	String password;
@@ -32,12 +32,12 @@ public class Employee {
 		this.email = email;
 	}
 
-	public int getErs_id() {
-		return ers_id;
+	public int getUserId() {
+		return user_id;
 	}
 
-	public void setErs_id(int ers_id) {
-		this.ers_id = ers_id;
+	public void setUserId(int ers_id) {
+		this.user_id = ers_id;
 	}
 
 	public int getUser_role_id() {
@@ -82,7 +82,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [ers_id=" + ers_id + ", user_role_id=" + user_role_id + ", username=" + username
+		return "Employee [ers_id=" + user_id + ", user_role_id=" + user_role_id + ", username=" + username
 				+ ", password=" + password + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
 				+ "]";
 	}	

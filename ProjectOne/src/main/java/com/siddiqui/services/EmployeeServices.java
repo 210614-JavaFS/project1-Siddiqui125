@@ -11,14 +11,6 @@ public class EmployeeServices {
 
 	private static EmployeeDAO dao = new EmployeeDAOImp();
 
-	public static List<Employee> allTickets() {
-		return dao.allTickets();
-	}
-
-	public static boolean addRequest(ReimbursementPlan plan) {
-		return dao.addRequest(plan);
-	}
-
 	public static Employee findbyUsername(String username) {
 		return dao.findbyUsername(username);
 
@@ -28,4 +20,8 @@ public class EmployeeServices {
 		return dao.findByRoleId(roleid);
 	}
 
+	public Employee getUsernameByUserId(int userID) {
+
+		return dao.getUserNameByUserID(userID);
+	}
 }

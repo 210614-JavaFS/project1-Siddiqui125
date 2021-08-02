@@ -6,14 +6,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.siddiqui.model.Employee;
+import com.siddiqui.model.ReimbursementPlan;
 import com.siddiqui.services.EmployeeServices;
 import com.siddiqui.services.ReimbursementService;
+import com.siddiqui.servlets.EmployeeServlet;
 
 public class Utils {
 
 	public static Employee currentEmployee;
 	public static EmployeeServices employeeServices = new EmployeeServices();
+	public static EmployeeServlet employeeServlet = new EmployeeServlet();
 	public static ReimbursementService reimbursementService = new ReimbursementService();
+	public static ReimbursementPlan currentPlan=new ReimbursementPlan();
 
 	public static boolean isAdmin = false;
 	public static boolean isEmployee = false;

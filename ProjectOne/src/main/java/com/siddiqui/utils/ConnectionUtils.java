@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.siddiqui.model.Employee;
+import com.siddiqui.model.ReimbursementPlan;
+import com.siddiqui.model.Status;
 import com.siddiqui.services.EmployeeServices;
+import com.siddiqui.services.ReimbursementService;
 
 public class ConnectionUtils {
 	public static Connection getConnection() throws SQLException {
@@ -25,16 +28,4 @@ public class ConnectionUtils {
 
 		return DriverManager.getConnection(url, username, password);
 	}
-
-	public static void main(String[] args) {
-		try {
-			Connection con = ConnectionUtils.getConnection();
-			System.out.println("Connection Successfully ");
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
 }

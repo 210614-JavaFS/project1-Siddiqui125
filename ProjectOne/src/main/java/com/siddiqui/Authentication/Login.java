@@ -10,40 +10,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.siddiqui.model.Employee;
 import com.siddiqui.services.EmployeeServices;
 import com.siddiqui.utils.Utils;
 
-public class Login extends HttpServlet {
+public class Login {
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private static ObjectMapper objMapper = new ObjectMapper();
 
-		String username = req.getParameter("userId");
-		String password = req.getParameter("password");
+	public static void userscreen(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 
 		RequestDispatcher reqDispatch = null;
-		PrintWriter printWriter = resp.getWriter();
+
+		PrintWriter printWriter = response.getWriter();
 
 		Employee employee = EmployeeServices.findbyUsername(username);
+		String role = EmployeeServices.findByRoleId(employee.getUser_role_id());
 
-		if (username.equals(employee.getUsername()) && password.equals(employee.getPassword())) {
+		String json = objMapper.writeValueAsString(employee);
 
-			Utils.currentEmployee = employee;
+		System.out.println(json);
 
-			String role = EmployeeServices.findByRoleId(employee.getUser_role_id());
+		printWriter.print(json);
+		response.setStatus(200);
 
-			if (role.equals("employee")) {
-				reqDispatch = req.getRequestDispatcher("employeeportal.html");
-			} else if (role.equals("manager")) {
-				reqDispatch = req.getRequestDispatcher("managerportal.html");
-			}
-
-			reqDispatch.forward(req, resp);
-
-		} else {
-			reqDispatch = req.getRequestDispatcher("index.html");
-			reqDispatch.include(req, resp);
-			printWriter.print("<span style='color:red; text-align:center'>Invalid Username or Password </span>");
-		}
 	}
+
 }
