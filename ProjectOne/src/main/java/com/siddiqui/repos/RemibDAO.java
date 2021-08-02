@@ -25,6 +25,10 @@ public interface RemibDAO {
 
 	public List<ReimbursementPlan> getAllbyReimbID(String reimb_id);
 
-	public boolean updateStatusByReimbid(int reimb_id, String action);
+	public boolean approveStatusByReimbid(int reimb_id, String action);
+
+	public boolean denyStatusByReimbid(int reimb_id, String action);
+
+	public boolean updateStatusByStatusId(int status_id, String status);
 
 }

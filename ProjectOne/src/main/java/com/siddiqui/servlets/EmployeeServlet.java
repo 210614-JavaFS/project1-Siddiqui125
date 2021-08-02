@@ -58,9 +58,7 @@ public class EmployeeServlet extends HttpServlet {
 		String json = objMapper.writeValueAsString(ticketList);
 
 		System.out.println(json);
-
 		PrintWriter printWriter = response.getWriter();
-
 		printWriter.print(json);
 		response.setStatus(200);
 
@@ -71,11 +69,9 @@ public class EmployeeServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("application/json");
-
 		response.setStatus(404);
-
 		showAllTickets(response);
-		service(request, response);
+		
 	}
 
 	@Override

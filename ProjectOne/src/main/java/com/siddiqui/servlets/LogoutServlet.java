@@ -14,8 +14,9 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String epath = request.getServletPath();
+		System.out.println(epath);
+		response.sendRedirect("/static/ProjectOne/");
 
-		request.getSession().invalidate();
-		RequestDispatcher rd = request.getRequestDispatcher("/static/ProjectOne/");
 	}
 }

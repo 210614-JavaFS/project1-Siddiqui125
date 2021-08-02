@@ -237,26 +237,55 @@ public class ReimbursementDAOImp implements RemibDAO {
 	}
 
 	@Override
-	public boolean updateStatusByReimbid(int reimb_id, String action) {
-//		if (action.equals("approve")) {
-		try (Connection conn = ConnectionUtils.getConnection()) {
-			String sql = "UPDATE ers_reimbursement set reimb_resolver = ?, reimb_resolved=? where reimb_id=?;";
+	public boolean approveStatusByReimbid(int reimb_id, String action) {
+		if (action.equals("approve")) {
+			try (Connection conn = ConnectionUtils.getConnection()) {
+				String sql = "UPDATE ers_reimbursement set reimb_resolver = ?, reimb_resolved=? where reimb_id=?;";
 
-			PreparedStatement statement = conn.prepareStatement(sql);
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-			LocalDateTime now = LocalDateTime.now();
+				PreparedStatement statement = conn.prepareStatement(sql);
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+				LocalDateTime now = LocalDateTime.now();
 
-			String dataResolved = dtf.format(now);
-			int userID = Utils.currentEmployee.getUserId();
-			int index = 0;
-			statement.setInt(++index, userID);
-			statement.setString(++index, dataResolved);
-			statement.setInt(++index, reimb_id);
-			int result = statement.executeUpdate();
-			updateStatusByStatusId(Utils.currentPlan.getRemib_statusId(), action);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
+				String dataResolved = dtf.format(now);
+				int userID = Utils.currentEmployee.getUserId();
+				int index = 0;
+				statement.setInt(++index, userID);
+				statement.setString(++index, dataResolved);
+				statement.setInt(++index, reimb_id);
+				int result = statement.executeUpdate();
+				ReimbursementPlan plan = new ReimbursementPlan();
+				updateStatusByStatusId(plan.getRemib_statusId(), action);
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean denyStatusByReimbid(int reimb_id, String action) {
+		if (action.equals("deny")) {
+			try (Connection conn = ConnectionUtils.getConnection()) {
+				String sql = "UPDATE ers_reimbursement set reimb_resolver = ?, reimb_resolved=? where reimb_id=?;";
+
+				PreparedStatement statement = conn.prepareStatement(sql);
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+				LocalDateTime now = LocalDateTime.now();
+
+				String dataResolved = dtf.format(now);
+				int userID = Utils.currentEmployee.getUserId();
+				int index = 0;
+				statement.setInt(++index, userID);
+				statement.setString(++index, dataResolved);
+				statement.setInt(++index, reimb_id);
+				boolean result = statement.executeUpdate() > 0;
+				statement.close();
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -271,9 +300,10 @@ public class ReimbursementDAOImp implements RemibDAO {
 
 			statement.setString(1, status);
 			statement.setInt(2, status_id);
-			int result = statement.executeUpdate();
+			Boolean result = statement.executeUpdate() > 0;
+			statement.close();
+			return result;
 
-			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 

@@ -46,8 +46,16 @@ public class ReimbursementService {
 		return remibDAO.getAllbyReimbID(reimb_id);
 	}
 
-	public static boolean updateStatusByReimbid(int reimb_id, String action) {
-		return remibDAO.updateStatusByReimbid(reimb_id, action);
+	public static boolean approveStatusByReimbid(int reimb_id, String action) {
+		return remibDAO.approveStatusByReimbid(reimb_id, action);
+	}
+
+	public static boolean denyStatusByReimbid(int reimb_id, String action) {
+		return remibDAO.denyStatusByReimbid(reimb_id, action);
+	}
+
+	public boolean updateStatusByStatusId(int status_id, String status) {
+		return remibDAO.updateStatusByStatusId(status_id, status);
 	}
 
 }

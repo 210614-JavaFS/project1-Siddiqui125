@@ -74,12 +74,12 @@ public class ManagerServlet extends HttpServlet {
 		} else if (epath.equals("/approve")) {
 
 			String reimb_id = request.getParameter("approveId");
-			Utils.reimbursementService.updateStatusByReimbid(Integer.valueOf(reimb_id), "approve");
+			Utils.reimbursementService.approveStatusByReimbid(Integer.valueOf(reimb_id), "approve");
 
 		} else if (epath.equals("/deny")) {
 
-			String reimb_id = request.getParameter("approveId");
-			Utils.reimbursementService.updateStatusByReimbid(Integer.valueOf(reimb_id), "deny");
+			String reimb_id = request.getParameter("denyId");
+			Utils.reimbursementService.denyStatusByReimbid(Integer.valueOf(reimb_id), "deny");
 
 		}
 
