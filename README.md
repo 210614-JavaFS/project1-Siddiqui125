@@ -1,6 +1,8 @@
 # project1-Siddiqui125
 project1-Siddiqui125 created by GitHub Classroom
+
 Technologies:
+
  Backend:
     Apache Tomcat 9.0
     Amazon AWS
@@ -8,13 +10,18 @@ Technologies:
     Log4j 
 
  Frontend:
+ 
     axios
     React 
     React Redux 
     React Router 
+    
  Testing:
+ 
     JUnit
+    
  Features: 
+ 
     Admin/employee can Login/Logout.
     Employee can view all their own request.
     Employee can submit the request.
